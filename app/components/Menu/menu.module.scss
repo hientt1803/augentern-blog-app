@@ -1,0 +1,37 @@
+.container {
+    flex: 2;
+    margin-top: 60px;
+
+    .title {
+        color: gray;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .subTitle {
+        font-size: 28px;
+    }
+
+    .travel {
+        background: #ff7857;
+    }
+
+    .culture {
+        background: #ffb14f;
+    }
+
+    .food {
+        background: #7fb881;
+    }
+
+    .fashion {
+        background: #ff7887;
+    }
+
+}
+
+@media screen and (max-width:1024px) {
+    .container {
+        display: none;
+    }
+}
