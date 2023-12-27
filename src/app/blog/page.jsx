@@ -1,5 +1,5 @@
-import CardList from "@/app/components/cardList/CardList";
-import Menu from "@/app/components/Menu/Menu";
+import CardList from "@/src/components/cardList/CardList";
+import Menu from "@/src/components/Menu/Menu";
 import React from "react";
 import styles from "./blogpage.module.scss";
 

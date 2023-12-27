@@ -1,7 +1,7 @@
 "use client";
 
-import { ThemeContext } from "@/app/context/ThemeContext";
 import React, { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const ThemeProvider = ({ children }) => {
   const { theme } = useContext(ThemeContext);

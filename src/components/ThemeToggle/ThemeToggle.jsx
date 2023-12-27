@@ -1,14 +1,12 @@
 "use client";
 
-import { ThemeContext } from "@/app/context/ThemeContext";
+import { ThemeContext } from "@/src/context/ThemeContext";
 import Image from "next/image";
 import React, { useContext } from "react";
 import styles from "./themetoggle.module.scss";
 
 const ThemeToggle = () => {
   const { theme, toggle } = useContext(ThemeContext);
-
-  console.log(theme);
 
   return (
     <div
