@@ -3,27 +3,24 @@ import Link from "next/link";
 import React from "react";
 import styles from "./card.module.scss";
 
-const Card = () => {
+const Card = ({ item, key }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={key}>
       <div className={styles.imageContainer}>
-        <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+        <Link href={`/${item.id}`}>
+          <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+        </Link>
       </div>
       <div className={styles.textContainer}>
         <div className={styles.detail}>
-          <span className={styles.date}>11.02.2023 - </span>
-          <span className={styles.category}>CULTURE</span>
+          <span className={styles.date}>{item.createdAt} - </span>
+          <span className={styles.category}>{item.catSlug}</span>
         </div>
-        <Link href="/">
-          <h1 className={styles.title}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
+        <Link href={`/${item.id}`}>
+          <h1 className={styles.title}>{item.title}</h1>
         </Link>
-        <p className={styles.desc}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-          unde, necessitatibus perspiciatis inventore sequi, provident nobis
-          iure veritatis earum, odit numquam perferendis nihil accusamus.
-          Adipisci numquam culpa atque ab. Quia!
-        </p>
-        <Link href="/" className={styles.link}>
+        <p className={styles.desc}>{item.desc}</p>
+        <Link href={`/${item.id}`} className={styles.link}>
           Read More
         </Link>
       </div>
