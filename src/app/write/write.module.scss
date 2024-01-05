@@ -51,6 +51,22 @@
         color: #b3b3b1;
     }
 
+    .label {
+        font-size: 18px;
+    }
+
+    .select {
+        margin: 0 0 50px 20px;
+        padding: 10px 20px;
+        width: max-content;
+        height: fit-content;
+        font-size: 18px;
+        background-color: var(--bg);
+        color: var(--text-color);
+        border: 1px solid var(--text-color);
+        outline: none;
+    }
+
     .publish {
         display: block;
         float: right;
