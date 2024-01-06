@@ -23,6 +23,10 @@
 
     .title {
         margin: 15px 0;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
     }
 
     .date {
@@ -38,6 +42,10 @@
         font-size: 18px;
         font-weight: 300;
         color: var(--soft-text-color);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
     }
 
     .link {

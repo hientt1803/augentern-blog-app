@@ -38,6 +38,19 @@ const CardList = async ({ page, cat }) => {
           {posts?.map((item) => (
             <Card item={item} key={item.id} />
           ))}
+          {posts.length === 0 && (
+            <h2
+              className={styles.title}
+              style={{
+                maxWidth: "800px",
+                textAlign: "center",
+                margin: "200px auto",
+              }}
+            >
+              There is no blog for this Category. {"Let's"} create one blog for
+              this category
+            </h2>
+          )}
         </div>
       </div>
       <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />

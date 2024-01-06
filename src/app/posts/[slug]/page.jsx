@@ -29,20 +29,25 @@ const SinglePage = async ({ params }) => {
         <div className={styles.textContainer}>
           <h1 className={styles.title}>{data?.title}</h1>
           <div className={styles.user}>
-            <div className={styles.userImageContainer}>
-              <Image
-                src={data?.user?.image || "/p1.jpeg"}
-                alt=""
-                fill
-                className={styles.avatar}
-              />
+            <div className={styles.userInfor}>
+              <div className={styles.userImageContainer}>
+                <Image
+                  src={data?.user?.image || "/p1.jpeg"}
+                  alt=""
+                  fill
+                  className={styles.avatar}
+                />
+              </div>
+              <div className={styles.userTextContainer}>
+                <span className={styles.username}>{data?.user?.name}</span>
+                <span className={styles.date}>
+                  {data?.createdAt.substring(0, 10)}
+                </span>
+              </div>
             </div>
-            <div className={styles.userTextContainer}>
-              <span className={styles.username}>{data?.user?.name}</span>
-              <span className={styles.date}>
-                {data?.createdAt.substring(0, 10)}
-              </span>
-            </div>
+            <span className={styles.views}>
+              views: <strong>{data?.views}</strong>
+            </span>
           </div>
         </div>
         <div className={styles.imageContainer}>

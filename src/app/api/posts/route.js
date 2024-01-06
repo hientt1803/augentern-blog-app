@@ -17,6 +17,7 @@ export const GET = async (req) => {
     where: {
       ...(cat && { catSlug: cat }),
     },
+    include: { user: true },
   };
 
   try {
@@ -36,7 +37,7 @@ export const GET = async (req) => {
 // CREATE A COMMENT
 export const POST = async (req) => {
   const session = await getAuthSession();
-
+ 
   if (!session) {
     return new NextResponse(
       JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })

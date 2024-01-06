@@ -3,27 +3,40 @@ import Link from "next/link";
 import React from "react";
 import styles from "./menuposts.module.scss";
 
-const MenuPosts = ({ withImage }) => {
+const MenuPosts = ({ withImage, menuPostsData }) => {
+  console.log(menuPostsData);
   return (
     <div className={styles.items}>
-      <Link href="/" className={styles.item}>
-        {withImage && (
-          <div className={styles.imageContainer}>
-            <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+      {menuPostsData?.map((menu) => (
+        <Link href={`/posts/${menu.slug}`} className={styles.item} key={menu.id}>
+          {withImage && (
+            <div className={styles.imageContainer}>
+              <Image
+                src={menu.img || "/p1.jpeg"}
+                alt=""
+                fill
+                className={styles.image}
+                loading="lazy"
+              />
+            </div>
+          )}
+          <div className={styles.textContainer}>
+            <span className={`${styles.category} ${styles.travel}`}>
+              {menu.catSlug}
+            </span>
+            <h3 className={styles.postTitle}>{menu.title}</h3>
+            <div className={styles.detail}>
+              <span className={styles.username}>{menu.user.name}</span>
+              <span className={styles.date}>
+                {" "}
+                - {menu.createdAt.substring(0, 10)}
+              </span>
+            </div>
           </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.travel}`}>Travel</span>
-          <h3 className={styles.postTitle}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h3>
-          <div className={styles.detail}>
-            <span className={styles.username}>Jonh Doe</span>
-            <span className={styles.date}> - 12.26.2023</span>
-          </div>
-        </div>
-      </Link>
-      <Link href="/" className={styles.item}>
+        </Link>
+      ))}
+
+      {/* <Link href="/" className={styles.item}>
         {withImage && (
           <div className={styles.imageContainer}>
             <Image src="/p1.jpeg" alt="" fill className={styles.image} />
@@ -77,7 +90,7 @@ const MenuPosts = ({ withImage }) => {
             <span className={styles.date}> - 12.26.2023</span>
           </div>
         </div>
-      </Link>
+      </Link> */}
     </div>
   );
 };

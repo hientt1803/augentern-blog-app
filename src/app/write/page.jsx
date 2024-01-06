@@ -16,6 +16,10 @@ import {
 import { app } from "@/src/utils/firebase";
 import { async } from "@firebase/util";
 
+// TOAST
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // FIREBASE
 const storage = getStorage(app);
 
@@ -50,6 +54,11 @@ const WritePage = () => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
+
+          toast.info(`Upload is ${Math.round(progress)}% done`, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");
@@ -59,10 +68,17 @@ const WritePage = () => {
               break;
           }
         },
-        (error) => {},
+        (error) => {
+          toast.error(`Upload failed: ${error.message}`, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             media.current = downloadURL;
+          });
+          toast.success("Upload successful!", {
+            position: toast.POSITION.TOP_RIGHT,
           });
         }
       );
@@ -108,86 +124,90 @@ const WritePage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <input
-        type="text"
-        placeholder="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className={styles.input}
-      />
-      <label htmlFor="cat" className={styles.label}>
-        Choose your category:{" "}
-      </label>
-      <select
-        name="cat"
-        id="cat"
-        className={styles.select}
-        onChange={(e) => setCatSlug(e.target.value)}
-      >
-        <option value="style">style</option>
-        <option value="fashion">fashion</option>
-        <option value="food">food</option>
-        <option value="culture">culture</option>
-        <option value="travel">travel</option>
-        <option value="coding">coding</option>
-      </select>
-      <div className={styles.editor}>
-        <button className={styles.button} onClick={() => setOpen(!open)}>
-          <Image src="/plus.png" alt="" width={16} height={16} />
-        </button>
-        {open && (
-          <div className={styles.add}>
-            <input
-              type="file"
-              id="image-file"
-              accept="image/*"
-              onChange={(e) => setFile(e.target.files[0])}
-              style={{ display: "none" }}
-            />
-            <button className={styles.addButton}>
-              <label htmlFor="image-file">
+    <>
+      <ToastContainer />
+
+      <div className={styles.container}>
+        <input
+          type="text"
+          placeholder="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className={styles.input}
+        />
+        <label htmlFor="cat" className={styles.label}>
+          Choose your category:{" "}
+        </label>
+        <select
+          name="cat"
+          id="cat"
+          className={styles.select}
+          onChange={(e) => setCatSlug(e.target.value)}
+        >
+          <option value="style">style</option>
+          <option value="fashion">fashion</option>
+          <option value="food">food</option>
+          <option value="culture">culture</option>
+          <option value="travel">travel</option>
+          <option value="coding">coding</option>
+        </select>
+        <div className={styles.editor}>
+          <button className={styles.button} onClick={() => setOpen(!open)}>
+            <Image src="/plus.png" alt="" width={16} height={16} />
+          </button>
+          {open && (
+            <div className={styles.add}>
+              <input
+                type="file"
+                id="image-file"
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files[0])}
+                style={{ display: "none" }}
+              />
+              <button className={styles.addButton}>
+                <label htmlFor="image-file">
+                  <Image
+                    src="/add_image.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    style={{ cursor: "pointer" }}
+                  />
+                </label>
+              </button>
+              <button className={styles.addButton}>
                 <Image
-                  src="/add_image.png"
+                  src="/external.png"
                   alt=""
                   width={16}
                   height={16}
                   style={{ cursor: "pointer" }}
                 />
-              </label>
-            </button>
-            <button className={styles.addButton}>
-              <Image
-                src="/external.png"
-                alt=""
-                width={16}
-                height={16}
-                style={{ cursor: "pointer" }}
-              />
-            </button>
-            <button className={styles.addButton}>
-              <Image
-                src="/video.png"
-                alt=""
-                width={16}
-                height={16}
-                style={{ cursor: "pointer" }}
-              />
-            </button>
-          </div>
-        )}
-        <ReactQuill
-          className={styles.textArea}
-          theme="bubble"
-          value={value}
-          onChange={setValue}
-          placeholder="Tell your story..."
-        />
+              </button>
+              <button className={styles.addButton}>
+                <Image
+                  src="/video.png"
+                  alt=""
+                  width={16}
+                  height={16}
+                  style={{ cursor: "pointer" }}
+                />
+              </button>
+            </div>
+          )}
+          <ReactQuill
+            className={styles.textArea}
+            theme="bubble"
+            value={value}
+            onChange={setValue}
+            placeholder="Tell your story..."
+          />
+        </div>
+        <button className={styles.publish} onClick={handleSubmit}>
+          Publish
+        </button>
       </div>
-      <button className={styles.publish} onClick={handleSubmit}>
-        Publish
-      </button>
-    </div>
+    </>
   );
 };
 

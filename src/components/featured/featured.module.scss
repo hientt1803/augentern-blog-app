@@ -34,12 +34,20 @@
 
     .postTitle {
         font-size: 40px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
     }
 
     .postDesc {
         font-size: 20px;
         font-weight: 300;
         color: var(--soft-text-color);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
     }
 
     .button {
@@ -47,6 +55,7 @@
         border: none;
         border-radius: 5px;
         width: max-content;
+        cursor: pointer;
     }
 
     @media screen and (max-width:1280px) {

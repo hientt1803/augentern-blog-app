@@ -8,7 +8,13 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.info}>
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="Tran Hien blog" width={50} height={50} />
+          <Image
+            src="https://images.pexels.com/photos/11370147/pexels-photo-11370147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            alt="Tran Hien blog"
+            width={50}
+            height={50}
+            style={{ borderRadius: "50%" }}
+          />
           <h1 className={styles.logoText}>Augen Blog</h1>
         </div>
         <p className={styles.desc}>
@@ -28,16 +34,16 @@ const Footer = () => {
         <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
           <Link href="/">Homepage</Link>
-          <Link href="/">Blog</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
+          <Link href="/blog">Blog</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Tags</span>
-          <Link href="/">Style</Link>
-          <Link href="/">Fashion</Link>
-          <Link href="/">Coding</Link>
-          <Link href="/">Travel</Link>
+          <Link href="/blog?cat=style">Style</Link>
+          <Link href="/blog?cat=fashion">Fashion</Link>
+          <Link href="/blog?cat=coding">Coding</Link>
+          <Link href="/blog?cat=travel">Travel</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Socials</span>
