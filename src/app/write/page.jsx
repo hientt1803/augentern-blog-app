@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import styles from "./write.module.scss";
 import { useRouter } from "next/navigation";
@@ -19,6 +18,7 @@ import { async } from "@firebase/util";
 // TOAST
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamic from "next/dynamic";
 
 // FIREBASE
 const storage = getStorage(app);
@@ -26,9 +26,11 @@ const storage = getStorage(app);
 const WritePage = () => {
   const { status } = useSession();
   const router = useRouter();
+  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   // action button
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // file upload
   const [file, setFile] = useState(null);
@@ -46,6 +48,7 @@ const WritePage = () => {
       const name = new Date().getTime() + file.name;
       const storageRef = ref(storage, name);
 
+      setLoading(true);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
@@ -80,6 +83,7 @@ const WritePage = () => {
           toast.success("Upload successful!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          setLoading(false);
         }
       );
     };
@@ -203,7 +207,11 @@ const WritePage = () => {
             placeholder="Tell your story..."
           />
         </div>
-        <button className={styles.publish} onClick={handleSubmit}>
+        <button
+          className={styles.publish}
+          disable={loading}
+          onClick={handleSubmit}
+        >
           Publish
         </button>
       </div>
